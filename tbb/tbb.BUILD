@@ -41,8 +41,8 @@ genrule(
 cc_library(
     name = "tbb",
     hdrs = glob([
-        "include/serial/*.h",
-        "include/tbb/**/*.h",
+        "include/serial/**",
+        "include/tbb/**/**",
         ]),
 		srcs = ["libtbb.a"],
     includes = ["include"],
