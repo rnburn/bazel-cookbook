@@ -1,0 +1,13 @@
+new_http_archive(
+    name = "org_netlib_src",
+    build_file = "netlib_src.BUILD",
+    url = "http://www.netlib.org/lapack/lapack-3.8.0.tar.gz",
+    strip_prefix = "lapack-3.8.0",
+)
+
+new_http_archive(
+    name = "org_netlib",
+    build_file = "netlib.BUILD",
+    url = "https://github.com/xianyi/OpenBLAS/archive/v0.2.20.tar.gz",
+    strip_prefix = "OpenBLAS-0.2.20",
+)

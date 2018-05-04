@@ -1,0 +1,44 @@
+genrule(
+	name = "build_openblas",
+	srcs = glob(["**"]) + [
+		"@local_config_cc//:toolchain",
+    "@org_netlib_src//:lapack",
+  ],
+	cmd = """
+				 set -e
+				 WORK_DIR=$$PWD
+				 DEST_DIR=$$PWD/$(@D)
+         export PATH=$$(dirname $(AR)):$$PATH
+				 export CC=$$PWD/$(CC)
+         export CXX=$$PWD/$(CC)
+				 export CXXFLAGS=$(CC_FLAGS)
+			   export NM=$(NM)
+				 export AR=$(AR)
+         NETLIB_README=$$(echo $(locations @org_netlib_src//:lapack) | grep -o "[^ ]*README.md")
+         export NETLIB_LAPACK_DIR=$$PWD/$$(dirname $$NETLIB_README)
+			   cd $$(dirname $(location :Makefile))
+
+         export TOPDIR=$$PWD
+         make CC=$$CC
+         mkdir build
+         export PREFIX=$$PWD/build
+         make install
+         cp build/lib/*.a $$DEST_DIR
+         cp -r build/include $$DEST_DIR
+
+	""",
+	outs = [
+    "include/cblas.h",
+    "include/openblas_config.h",
+    "include/lapacke.h",
+    "include/lapacke_mangling.h",
+    "include/lapacke_config.h",
+		"libopenblas.a",
+	]	
+)
+
+cc_library(
+    name = "blas",
+		srcs = ["libopenblas.a"],
+    visibility = ["//visibility:public"],
+)
