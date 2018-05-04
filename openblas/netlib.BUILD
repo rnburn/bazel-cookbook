@@ -40,5 +40,26 @@ genrule(
 cc_library(
     name = "blas",
 		srcs = ["libopenblas.a"],
+    hdrs = [
+      "include/cblas.h",
+      "include/openblas_config.h",
+    ],
+    strip_include_prefix = "include",
+    include_prefix = "netlib",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "lapack",
+    hdrs = [
+      "include/lapacke.h",
+      "include/lapacke_mangling.h",
+      "include/lapacke_config.h",
+    ],
+    deps = [
+      ":blas",
+    ],
+    strip_include_prefix = "include",
+    include_prefix = "netlib",
     visibility = ["//visibility:public"],
 )
