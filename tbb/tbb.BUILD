@@ -16,10 +16,10 @@ genrule(
 			   cd $$(dirname $(location :Makefile))
 
          #TBB's build needs some help to figure out what compiler it's using
-         if $$CXX --version | grep g++ &> /dev/null; then
-				   COMPILER_OPT="compiler=gcc"
-         elif $$CXX --version | grep clang &> /dev/null; then 
+         if $$CXX --version | grep clang &> /dev/null; then 
            COMPILER_OPT="compiler=clang"
+         else
+				   COMPILER_OPT="compiler=gcc"
          fi 
 
          # uses extra_inc=big_iron.inc to specify that static libraries are

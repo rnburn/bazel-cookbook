@@ -1,0 +1,6 @@
+new_http_archive(
+    name = "gnu_readline",
+    build_file = "readline.BUILD",
+    url = "https://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz",
+    strip_prefix = "readline-7.0",
+)
