@@ -9,10 +9,7 @@ genrule(
 				 export CC=$$PWD/$(CC)
          export CXX=$$PWD/$(CC)
 				 export CXXFLAGS=$(CC_FLAGS)
-			   export NM=$$PWD/$(NM)
-				 export AR=$$PWD/$(AR)
 			   cd $$(dirname $(location :README))
-         mkdir build
          ./configure --disable-shared --prefix=$$PWD/build
          make
          make install
@@ -49,6 +46,9 @@ cc_library(
 		srcs = [
       "libreadline.a",
       "libhistory.a",
+    ],
+    deps = [
+      "@gnu_ncurses//:ncurses"
     ],
     visibility = ["//visibility:public"],
 )

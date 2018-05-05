@@ -1,4 +1,11 @@
 new_http_archive(
+    name = "gnu_ncurses",
+    build_file = "ncurses.BUILD",
+    url = "https://invisible-mirror.net/archives/ncurses/ncurses-6.1.tar.gz",
+    strip_prefix = "ncurses-6.1",
+)
+
+new_http_archive(
     name = "gnu_readline",
     build_file = "readline.BUILD",
     url = "https://ftp.gnu.org/gnu/readline/readline-7.0.tar.gz",
