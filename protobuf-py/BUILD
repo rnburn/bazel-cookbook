@@ -1,11 +1,5 @@
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 
-# proto_library(
-#     name = "a_proto",
-#     srcs = ["a.proto"],
-#     visibility = ["//visibility:public"],
-# )
-
 py_proto_library(
     name = "a_py_proto",
     srcs = ["a.proto"],
