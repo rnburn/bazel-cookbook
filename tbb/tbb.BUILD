@@ -23,7 +23,7 @@ genrule(
          fi 
 
          # uses extra_inc=big_iron.inc to specify that static libraries are
-         # build. See https://software.intel.com/en-us/forums/intel-threading-building-blocks/topic/297792
+         # built. See https://software.intel.com/en-us/forums/intel-threading-building-blocks/topic/297792
          make tbb_build_prefix="build" \
               extra_inc=big_iron.inc \
               $$COMPILER_OPT; \
