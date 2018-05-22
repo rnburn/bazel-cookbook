@@ -1,25 +1,25 @@
 genrule(
-	name = "build_tbb",
-	srcs = glob(["**"]) + [
-		"@local_config_cc//:toolchain",
+  name = "build_tbb",
+  srcs = glob(["**"]) + [
+    "@local_config_cc//:toolchain",
   ],
-	cmd = """
-				 set -e
-				 WORK_DIR=$$PWD
-				 DEST_DIR=$$PWD/$(@D)
+  cmd = """
+         set -e
+         WORK_DIR=$$PWD
+         DEST_DIR=$$PWD/$(@D)
          export PATH=$$(dirname $(AR)):$$PATH
-				 export CC=$$PWD/$(C_COMPILER)
+         export CC=$$PWD/$(C_COMPILER)
          export CXX=$$PWD/$(CC)
-				 export CXXFLAGS=$(CC_FLAGS)
-			   export NM=$(NM)
-				 export AR=$(AR)
-			   cd $$(dirname $(location :Makefile))
+         export CXXFLAGS=$(CC_FLAGS)
+         export NM=$(NM)
+         export AR=$(AR)
+         cd $$(dirname $(location :Makefile))
 
          #TBB's build needs some help to figure out what compiler it's using
          if $$CXX --version | grep clang &> /dev/null; then 
            COMPILER_OPT="compiler=clang"
          else
-				   COMPILER_OPT="compiler=gcc"
+           COMPILER_OPT="compiler=gcc"
          fi 
 
          # uses extra_inc=big_iron.inc to specify that static libraries are
@@ -30,12 +30,12 @@ genrule(
 
          echo cp build/build_{release,debug}/*.a $$DEST_DIR
          cp build/build_{release,debug}/*.a $$DEST_DIR
-				 cd $$WORK_DIR
-	""",
-	outs = [
-		"libtbb.a",
-		"libtbbmalloc.a",
-	]	
+         cd $$WORK_DIR
+  """,
+  outs = [
+    "libtbb.a",
+    "libtbbmalloc.a",
+  ] 
 )
 
 cc_library(
@@ -44,7 +44,7 @@ cc_library(
         "include/serial/**",
         "include/tbb/**/**",
         ]),
-		srcs = ["libtbb.a"],
+    srcs = ["libtbb.a"],
     includes = ["include"],
     visibility = ["//visibility:public"],
 )
