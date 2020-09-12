@@ -1,0 +1,4 @@
+build:with_backtrace --copt -std=c++17
+build:with_backtrace --linkopt -rdynamic
+build:with_backtrace --copt -DWITH_BACKTRACE
+build:with_backtrace -c dbg
